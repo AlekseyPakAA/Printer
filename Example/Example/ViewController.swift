@@ -17,7 +17,7 @@ class ViewController: UIViewController {
  
     @IBAction func touchPrint(sender: UIButton) {
 
-        guard let image = UIImage(named: "demo_2") else {
+        guard let image = UIImage(named: "demo_3") else {
             return
         }
 
