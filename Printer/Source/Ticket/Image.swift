@@ -141,6 +141,10 @@ extension Image {
         
         for _ in 0..<nHeight {
             data.append(
+                ESC_POSCommand.justification(1).rawValue
+            )
+
+            data.append(
                 ESC_POSCommand.beginPrintImage(
                     xl: UInt8(nBytesPerLine % 0xff),
                     xH: UInt8(nBytesPerLine / 0xff),

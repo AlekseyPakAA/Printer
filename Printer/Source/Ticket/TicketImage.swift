@@ -20,9 +20,9 @@ public struct TicketImage: BlockDataProvider {
     public func data(using encoding: String.Encoding) -> Data {
         var result = Data()
        
-        if let attrs = attributes {
-            result.append(Data(attrs.flatMap { $0.attribute }))
-        }
+//        if let attrs = attributes {
+//            result.append(Data(attrs.flatMap { $0.attribute }))
+//        }
         
         if let data = image.ticketData {
             result.append(data)
