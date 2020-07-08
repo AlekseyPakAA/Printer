@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         }
 
         var ticket = Ticket(
-            .image(image, attributes: .alignment(.center))
+            .image(image, attributes: .alignment(.right))
         )
         
         ticket.feedLinesOnHead = 2
