@@ -98,7 +98,7 @@ extension ESC_POSCommand {
     }
     
     enum ImageSize: UInt8 {
-        case normal = 48
+        case normal = 0
         case doubleWidth = 49
         case doubleHeight = 50
         case doubleSize = 51

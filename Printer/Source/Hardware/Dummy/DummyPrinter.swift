@@ -15,7 +15,7 @@ public class DummyPrinter {
     public func print(_ value: ESCPOSCommandsCreator) {
         let data = value.data(using: .utf8)
         for d in data {
-            debugPrint(d.reduce("", { $0 + String(format: "%d ", $1)}))
+            debugPrint(d.reduce("", { $0 + String(format: "%03d ", $1)}))
         }
     }
 }

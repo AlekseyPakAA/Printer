@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 public protocol Image {
     var ticketImage: CGImage { get }
@@ -139,14 +140,40 @@ extension Image {
         var k: Int = 0
         
         for _ in 0..<nHeight {
-            data.append(ESC_POSCommand.beginPrintImage(xl: UInt8(nBytesPerLine % 0xff), xH: UInt8(nBytesPerLine / 0xff), yl: UInt8(1), yH: UInt8(0)).rawValue)
+            data.append(
+                ESC_POSCommand.beginPrintImage(
+                    xl: UInt8(nBytesPerLine % 0xff),
+                    xH: UInt8(nBytesPerLine / 0xff),
+                    yl: UInt8(1),
+                    yH: UInt8(0)
+                ).rawValue
+            )
             
             var bytes = [UInt8]()
             for _ in 0..<nBytesPerLine {
-                bytes.append(UInt8(p0[Int(src[k])] + p1[Int(src[k + 1])] + p2[Int(src[k + 2])] + p3[Int(src[k + 3])] + p4[Int(src[k + 4])] + p5[Int(src[k + 5])] + p6[Int(src[k + 6])] + Int(src[k + 7])))
+                bytes.append(
+                    UInt8(
+                        p0[Int(src[k])] +
+                        p1[Int(src[k + 1])] +
+                        p2[Int(src[k + 2])] +
+                        p3[Int(src[k + 3])] +
+                        p4[Int(src[k + 4])] +
+                        p5[Int(src[k + 5])] +
+                        p6[Int(src[k + 6])] +
+                        Int(src[k + 7])
+                    )
+                )
                 k = k + 8
             }
             data.append(bytes)
+
+            let string = bytes
+                .map {
+                    String($0, radix: 2).pad(with: "0", toLength: 8)
+                }
+                .joined()
+
+            print(string)
         }
         let rdata: [UInt8] = data.flatMap { $0 }
         return rdata
@@ -231,3 +258,11 @@ extension UIView: Image {
     }
 }
 
+extension String {
+    func pad(with character: String, toLength length: Int) -> String {
+        let padCount = length - self.count
+        guard padCount > 0 else { return self }
+
+        return String(repeating: character, count: padCount) + self
+    }
+}
